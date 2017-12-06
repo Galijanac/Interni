@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.IO;
 using System.Runtime.InteropServices;
 using Excel = Microsoft.Office.Interop.Excel;
+using System.Threading;
 
 namespace KacinProjekat
 {
@@ -34,6 +35,7 @@ namespace KacinProjekat
         public static Excel.Worksheet xlWorkSheetWrite;
         public static Excel.Range rangeWrite;
 
+     
 
         public MainWindow()
         {
@@ -63,7 +65,7 @@ namespace KacinProjekat
 
         private void Button_Click_Close(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            CloseWindowAndFiles();
         }
 
         private void ButtonFuction(string buttonName)
@@ -74,24 +76,16 @@ namespace KacinProjekat
                 xlWorkSheetWrite.Cells[columsRead, 1] = ((string)(rangeRead.Cells[columsRead, rowsRead] as Excel.Range).Value2).TrimEnd().TrimStart();
                 xlWorkSheetWrite.Cells[columsRead, 2] = buttonName;
 
-                xlWorkBookWrite.SaveAs(path, Excel.XlFileFormat.xlWorkbookDefault, Type.Missing, Type.Missing, false, false, Excel.XlSaveAsAccessMode.xlNoChange, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+                SeparateExcel separateExcel = new SeparateExcel();
 
-                xlWorkBookWrite.Close();
-                xlWorkBookRead.Close(true, null, null);
-                xlAppRead.Quit();
-                Marshal.ReleaseComObject(xlWorkSheetWrite);
-                Marshal.ReleaseComObject(xlWorkSheetWrite);
-                Marshal.ReleaseComObject(xlWorkSheetRead);
-                Marshal.ReleaseComObject(xlWorkBookRead);
-                Marshal.ReleaseComObject(xlAppRead);
-
-                SeparateExcel separateExcel = new SeparateExcel(path);
-                this.Hide();
-                separateExcel.Show();
-                separateExcel.Activate();
-
-
-                this.Close();
+                separateExcel.ShowDialog();
+                if (separateExcel.isClosed)
+                {
+                   xlWorkBookWrite.SaveAs(path, Excel.XlFileFormat.xlWorkbookDefault, Type.Missing, Type.Missing, false, false, Excel.XlSaveAsAccessMode.xlNoChange, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+                   separateExcel.GenerateFiles(path);
+                   CloseWindowAndFiles();
+                }
+                
             }
             else
             {
@@ -107,7 +101,20 @@ namespace KacinProjekat
         {
             columsRead--;
             webBrowser.Navigate(((string)(rangeRead.Cells[columsRead, rowsRead] as Excel.Range).Value2).TrimEnd().TrimStart());
+        }
 
+        public void CloseWindowAndFiles()
+        {
+            xlWorkBookWrite.Close();
+            xlWorkBookRead.Close(true, null, null);
+            xlAppRead.Quit();
+            Marshal.ReleaseComObject(xlWorkSheetWrite);
+            Marshal.ReleaseComObject(xlWorkSheetWrite);
+            Marshal.ReleaseComObject(xlWorkSheetRead);
+            Marshal.ReleaseComObject(xlWorkBookRead);
+            Marshal.ReleaseComObject(xlAppRead);
+
+            this.Close();
         }
     }
 }

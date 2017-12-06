@@ -19,8 +19,10 @@ namespace KacinProjekat
     /// </summary>
     public partial class SeparateExcel : Window
     {
-        public SeparateExcel(string excelPath)
+        public Boolean isClosed { get; set; }
+        public SeparateExcel()
         {
+            isClosed = false;
             InitializeComponent();          
         }
 
@@ -30,7 +32,12 @@ namespace KacinProjekat
         }
         private void Button_Click_Yes(object sender, RoutedEventArgs e)
         {
+            this.isClosed = true;
             this.Close();
+        }
+        public void GenerateFiles(string path)
+        {
+            // TO DO
         }
     }
 }
