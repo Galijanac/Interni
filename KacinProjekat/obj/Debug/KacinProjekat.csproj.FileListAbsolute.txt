@@ -1,0 +1,17 @@
+D:\Projekti\KacinProjekat\KacinProjekat\bin\Debug\KacinProjekat.exe.config
+D:\Projekti\KacinProjekat\KacinProjekat\bin\Debug\KacinProjekat.exe
+D:\Projekti\KacinProjekat\KacinProjekat\bin\Debug\KacinProjekat.pdb
+D:\Projekti\KacinProjekat\KacinProjekat\obj\Debug\KacinProjekat.csproj.ResolveComReference.cache
+D:\Projekti\KacinProjekat\KacinProjekat\obj\Debug\MainWindow.g.cs
+D:\Projekti\KacinProjekat\KacinProjekat\obj\Debug\SeparateExcel.g.cs
+D:\Projekti\KacinProjekat\KacinProjekat\obj\Debug\App.g.cs
+D:\Projekti\KacinProjekat\KacinProjekat\obj\Debug\KacinProjekat_MarkupCompile.cache
+D:\Projekti\KacinProjekat\KacinProjekat\obj\Debug\KacinProjekat_MarkupCompile.lref
+D:\Projekti\KacinProjekat\KacinProjekat\obj\Debug\MainWindow.baml
+D:\Projekti\KacinProjekat\KacinProjekat\obj\Debug\SeparateExcel.baml
+D:\Projekti\KacinProjekat\KacinProjekat\obj\Debug\KacinProjekat.g.resources
+D:\Projekti\KacinProjekat\KacinProjekat\obj\Debug\KacinProjekat.Properties.Resources.resources
+D:\Projekti\KacinProjekat\KacinProjekat\obj\Debug\KacinProjekat.csproj.GenerateResource.Cache
+D:\Projekti\KacinProjekat\KacinProjekat\obj\Debug\KacinProjekat.exe
+D:\Projekti\KacinProjekat\KacinProjekat\obj\Debug\KacinProjekat.pdb
+D:\Projekti\KacinProjekat\KacinProjekat\obj\Debug\KacinProjekat.csprojResolveAssemblyReference.cache

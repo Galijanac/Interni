@@ -1,0 +1,15 @@
+﻿<Window x:Class="KacinProjekat.SeparateExcel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KacinProjekat"
+        mc:Ignorable="d"
+        Title="SeparateExcel" Height="200" Width="300">
+    <Grid>
+        <Button Content="Yes" HorizontalAlignment="Left" Margin="64,0,0,35.4" VerticalAlignment="Bottom" Width="75" RenderTransformOrigin="0.443,2.098" Click="Button_Click_Yes"/>
+        <Button Content="No" HorizontalAlignment="Left" Margin="166,0,0,35.4" VerticalAlignment="Bottom" Width="75" RenderTransformOrigin="0.523,-1.86" Click="Button_Click_No"/>
+        <Label Content="Do you want to separate in &#xD;&#xA;to different excel files by &#xD;&#xA;category?" HorizontalAlignment="Left" Margin="64,29,0,0" VerticalAlignment="Top" Width="177" Height="69"/>
+
+    </Grid>
+</Window>
