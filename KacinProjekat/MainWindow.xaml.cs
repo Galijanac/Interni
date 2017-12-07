@@ -56,6 +56,7 @@ namespace KacinProjekat
                 rangeRead = xlWorkSheetRead.UsedRange;
                 columsRead = 1 ;
 
+                int pera = rangeRead.Columns.Count;
 
                 xlWorkSheetWrite = (Excel.Worksheet)xlApp.Worksheets.Add(Missing.Value, Missing.Value, Missing.Value, Missing.Value);
                 xlWorkSheetWrite.Name = "All"+ DateTime.Now.ToString(" dd.MM.yyyy hh.mm.ss");
@@ -81,9 +82,15 @@ namespace KacinProjekat
             CloseWindowAndFiles();
         }
 
+        private void Button_Click_RollBack(object sender, RoutedEventArgs e)
+        {
+            columsRead--;
+            webBrowser.Navigate(((string)(rangeRead.Cells[columsRead, rowsRead] as Excel.Range).Value2).TrimEnd().TrimStart());
+        }
+
         private void ButtonFuction(string buttonName)
         {
-            if (columsRead > rangeRead.Columns.Count)
+            if (columsRead >= rangeRead.Rows.Count)
             {
                 
                 xlWorkSheetWrite.Cells[columsRead, 1] = ((string)(rangeRead.Cells[columsRead, rowsRead] as Excel.Range).Value2).TrimEnd().TrimStart();
@@ -108,12 +115,6 @@ namespace KacinProjekat
                 webBrowser.Navigate(((string)(rangeRead.Cells[columsRead, rowsRead] as Excel.Range).Value2).TrimEnd().TrimStart());
             }
 
-        }
-
-        private void Button_Click_RollBack(object sender, RoutedEventArgs e)
-        {
-            columsRead--;
-            webBrowser.Navigate(((string)(rangeRead.Cells[columsRead, rowsRead] as Excel.Range).Value2).TrimEnd().TrimStart());
         }
 
         public void CloseWindowAndFiles()

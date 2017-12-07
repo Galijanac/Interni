@@ -48,7 +48,7 @@ namespace KacinProjekat
 
             List<String> categoryList = new List<string>();
             string category;
-            for (int i = 1; i <= rangeRead.Columns.Count; i++)
+            for (int i = 1; i <= rangeRead.Rows.Count; i++)
             {
                 category = (rangeRead.Cells[i, 2] as Excel.Range).Value2;
                 if (!categoryList.Contains(category))
@@ -57,7 +57,7 @@ namespace KacinProjekat
                     xlWorkSheetWrite.Name = category + DateTime.Now.ToString(" dd.MM.yyyy hh.mm.ss");
                     Excel.Range rangeWrite = xlWorkSheetWrite.UsedRange;
                     int counter = 0;
-                    for (int j = i; j <= rangeRead.Columns.Count; j++)
+                    for (int j = i; j <= rangeRead.Rows.Count; j++)
                     {
                         if ((rangeRead.Cells[j, 2] as Excel.Range).Value2 == category)
                         {
