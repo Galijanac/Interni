@@ -73,14 +73,7 @@ namespace KacinProjekat
                 }
 
             }
-            //Excel.Worksheet xlWorkSheetWrite = (Excel.Worksheet)xlAppRead.Worksheets.Add(Missing.Value, Missing.Value, Missing.Value, Missing.Value);
-            //xlWorkSheetRead.Name = "All";
-            //Excel.Range rangeRead = xlWorkSheetRead.UsedRange;
-            //(rangeRead.Cells[1, 1] as Excel.Range).Value2 = "pera";
-            ////Activate the first worksheet by default.
-            //((Excel.Worksheet)xlAppRead.ActiveWorkbook.Sheets[1]).Activate();
 
-            //Save As the excel file.
             xlApp.Quit();         
         }
     }
