@@ -16,6 +16,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Configuration;
+using System.Reflection;
 
 namespace KacinProjekat
 {
@@ -24,19 +25,16 @@ namespace KacinProjekat
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static Excel.Application xlAppRead;
+        public static Excel.Application xlApp;
         public static Excel.Workbook xlWorkBookRead;
         public static Excel.Worksheet xlWorkSheetRead;
         public static Excel.Range rangeRead;
         public static int columsRead;
         public static int rowsRead;
 
-        public static Excel.Workbook xlWorkBookWrite;
         public static Excel.Worksheet xlWorkSheetWrite;
-        public static Excel.Range rangeWrite;
 
         public static string path;
-        public static string savePath = ConfigurationManager.AppSettings["savingPath"] + DateTime.Now.ToString("dd.MM.yyyy HH,mm All") + ".xlsx";
 
         public MainWindow()
         {
@@ -51,15 +49,16 @@ namespace KacinProjekat
             {
                 path = getPath.path;
                 rowsRead = getPath.row;
-
-                xlAppRead = new Excel.Application();
-                xlWorkBookRead = xlAppRead.Workbooks.Open(path, 0, true, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
-                xlWorkSheetRead = (Excel.Worksheet)xlWorkBookRead.Worksheets.get_Item(1);
+            
+                xlApp = new Excel.Application();
+                xlWorkBookRead = xlApp.Workbooks.Open(path, Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value);
+                xlWorkSheetRead = (Excel.Worksheet)xlWorkBookRead.Worksheets.get_Item(xlApp.Sheets.Count);
                 rangeRead = xlWorkSheetRead.UsedRange;
-                columsRead = 1;
+                columsRead = 1 ;
 
-                xlWorkBookWrite = xlAppRead.Workbooks.Add("");
-                xlWorkSheetWrite = (Excel.Worksheet)xlWorkBookWrite.ActiveSheet;
+
+                xlWorkSheetWrite = (Excel.Worksheet)xlApp.Worksheets.Add(Missing.Value, Missing.Value, Missing.Value, Missing.Value);
+                xlWorkSheetWrite.Name = "All"+ DateTime.Now.ToString(" dd.MM.yyyy hh.mm.ss");
 
                 InitializeComponent();
 
@@ -78,7 +77,7 @@ namespace KacinProjekat
 
         private void Button_Click_Close(object sender, RoutedEventArgs e)
         {
-            xlWorkBookWrite.SaveAs(savePath, Excel.XlFileFormat.xlWorkbookDefault, Type.Missing, Type.Missing, false, false, Excel.XlSaveAsAccessMode.xlNoChange, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+            xlApp.ActiveWorkbook.Save();
             CloseWindowAndFiles();
         }
 
@@ -95,9 +94,9 @@ namespace KacinProjekat
                 separateExcel.ShowDialog();
                 if (separateExcel.isClosed)
                 {
-                   xlWorkBookWrite.SaveAs(savePath, Excel.XlFileFormat.xlWorkbookDefault, Type.Missing, Type.Missing, false, false, Excel.XlSaveAsAccessMode.xlNoChange, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);                   
-                   CloseWindowAndFiles();
-                   separateExcel.GenerateFiles(savePath);
+                    xlApp.ActiveWorkbook.Save();
+                    CloseWindowAndFiles();
+                    separateExcel.GenerateFiles(path);
                 }
                 
             }
@@ -119,14 +118,13 @@ namespace KacinProjekat
 
         public void CloseWindowAndFiles()
         {
-            xlWorkBookWrite.Close();
             xlWorkBookRead.Close(true, null, null);
-            xlAppRead.Quit();
+            xlApp.Quit();
             Marshal.ReleaseComObject(xlWorkSheetWrite);
             Marshal.ReleaseComObject(xlWorkSheetWrite);
             Marshal.ReleaseComObject(xlWorkSheetRead);
             Marshal.ReleaseComObject(xlWorkBookRead);
-            Marshal.ReleaseComObject(xlAppRead);
+            Marshal.ReleaseComObject(xlApp);
 
             this.Close();
         }
