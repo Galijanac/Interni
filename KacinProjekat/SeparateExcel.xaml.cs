@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.IO;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace KacinProjekat
 {
@@ -35,9 +38,12 @@ namespace KacinProjekat
             this.isClosed = true;
             this.Close();
         }
-        public void GenerateFiles(string path)
+        public void GenerateFiles(string readPath)
         {
-            // TO DO
+            string savePath = ConfigurationManager.AppSettings["savingPath"];
+            savePath += DateTime.Now.ToString("dd.MM.yyyy hh.mm");
+            Directory.CreateDirectory(savePath);
+            
         }
     }
 }

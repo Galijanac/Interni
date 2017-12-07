@@ -32,3 +32,5 @@ D:\Repositries\Interni\KacinProjekat\obj\Debug\KacinProjekat.Properties.Resource
 D:\Repositries\Interni\KacinProjekat\obj\Debug\KacinProjekat.csproj.GenerateResource.Cache
 D:\Repositries\Interni\KacinProjekat\obj\Debug\KacinProjekat.exe
 D:\Repositries\Interni\KacinProjekat\obj\Debug\KacinProjekat.pdb
+D:\Repositries\Interni\KacinProjekat\obj\Debug\GetPath.g.cs
+D:\Repositries\Interni\KacinProjekat\obj\Debug\GetPath.baml
