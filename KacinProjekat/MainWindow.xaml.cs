@@ -47,23 +47,25 @@ namespace KacinProjekat
             }
             else
             {
-                path = getPath.path;
-                rowsRead = getPath.row;
-            
-                xlApp = new Excel.Application();
-                xlWorkBookRead = xlApp.Workbooks.Open(path, Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value);
-                xlWorkSheetRead = (Excel.Worksheet)xlWorkBookRead.Worksheets.get_Item(xlApp.Sheets.Count);
-                rangeRead = xlWorkSheetRead.UsedRange;
-                columsRead = 1 ;
+                    path = getPath.path;
+                    rowsRead = getPath.row;
 
-                int pera = rangeRead.Columns.Count;
+                    xlApp = new Excel.Application();
 
-                xlWorkSheetWrite = (Excel.Worksheet)xlApp.Worksheets.Add(Missing.Value, Missing.Value, Missing.Value, Missing.Value);
-                xlWorkSheetWrite.Name = "All"+ DateTime.Now.ToString(" dd.MM.yyyy hh.mm.ss");
+                    xlWorkBookRead = xlApp.Workbooks.Open(path, Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value);
 
-                InitializeComponent();
+                    xlWorkSheetRead = (Excel.Worksheet)xlWorkBookRead.Worksheets.get_Item(xlApp.Sheets.Count);
+                    rangeRead = xlWorkSheetRead.UsedRange;
+                    columsRead = 1;
 
-                webBrowser.Navigate(((string)(rangeRead.Cells[columsRead, rowsRead] as Excel.Range).Value2).TrimEnd().TrimStart());
+                    int pera = rangeRead.Columns.Count;
+
+                    xlWorkSheetWrite = (Excel.Worksheet)xlApp.Worksheets.Add(Missing.Value, Missing.Value, Missing.Value, Missing.Value);
+                    xlWorkSheetWrite.Name = "All" + DateTime.Now.ToString(" dd.MM.yyyy hh.mm.ss");
+
+                    InitializeComponent();
+
+                    webBrowser.Navigate(((string)(rangeRead.Cells[columsRead, rowsRead] as Excel.Range).Value2).TrimEnd().TrimStart());                
             }
         }
         private void Button_Click_Forum(object sender, RoutedEventArgs e)
@@ -78,7 +80,7 @@ namespace KacinProjekat
 
         private void Button_Click_Close(object sender, RoutedEventArgs e)
         {
-            xlApp.ActiveWorkbook.Save();
+            xlApp.ActiveWorkbook.SaveAs(path.Replace(".xlsx", "") + DateTime.Now.ToString(" dd.MM.yyyy hh.mm.ss") + ".xlsx");
             CloseWindowAndFiles();
         }
 
@@ -101,9 +103,9 @@ namespace KacinProjekat
                 separateExcel.ShowDialog();
                 if (separateExcel.isClosed)
                 {
-                    xlApp.ActiveWorkbook.Save();
+                    xlApp.ActiveWorkbook.SaveAs(path.Replace(".xlsx","") + DateTime.Now.ToString(" dd.MM.yyyy hh.mm.ss") + ".xlsx");
                     CloseWindowAndFiles();
-                    separateExcel.GenerateFiles(path);
+                    separateExcel.GenerateFiles(path.Replace(".xlsx", "") + DateTime.Now.ToString(" dd.MM.yyyy hh.mm.ss") + ".xlsx");
                 }
                 
             }

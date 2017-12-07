@@ -54,7 +54,7 @@ namespace KacinProjekat
                 if (!categoryList.Contains(category))
                 {
                     Excel.Worksheet xlWorkSheetWrite = (Excel.Worksheet)xlApp.Worksheets.Add(Missing.Value, Missing.Value, Missing.Value, Missing.Value);
-                    xlWorkSheetWrite.Name = category + DateTime.Now.ToString(" dd.MM.yyyy hh.mm.ss");
+                    xlWorkSheetWrite.Name = category;
                     Excel.Range rangeWrite = xlWorkSheetWrite.UsedRange;
                     int counter = 0;
                     for (int j = i; j <= rangeRead.Rows.Count; j++)
